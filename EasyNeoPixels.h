@@ -1,7 +1,8 @@
 
 /*
-  EasyNeoPixels.h - Library for making neopixels more approachable.
+  EasyNeoPixels.h - Library for making neopixels more approachable. With added RGBW support.
   Created by Evelyn Masso, April 9, 2017.
+  Modified by: Monty Perrotti, August 30, 2021.
 */
 
 #pragma once
@@ -11,7 +12,13 @@
 
 Adafruit_NeoPixel easyNeoPixels;
 
-void setupEasyNeoPixels(int pin, int num) {
+void setupEasyNeoPixels(int pin, int num, bool isRGBW) {
+  
+  if (isRGBW) {
+    easyNeoPixels = Adafruit_NeoPixel(num, pin, NEO_RGBW + NEO_KHZ800);
+    easyNeoPixels.begin();
+    return;
+  }
   easyNeoPixels = Adafruit_NeoPixel(num, pin, NEO_GRB + NEO_KHZ800);
   easyNeoPixels.begin();
 }
